@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: prput
+# key: prput
+# --
+params.put("$1",$1);
+$0

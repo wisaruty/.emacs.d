@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: ftxt
+# key: ftxt
+# --
+<FormItem
+label="$1"
+prop="$2">
+<DslInput
+v-model="formItem.$2"
+id="$2"
+name="$2"></DslInput>
+</FormItem>
+$0

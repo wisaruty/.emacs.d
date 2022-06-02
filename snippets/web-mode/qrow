@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: qrow
+# key: qrow
+# --
+<div class="row q-pt-md">
+<div class="col-4">
+$1
+</div>
+<div class="col-4">
+$2
+</div>
+<div class="col-4">
+$3
+</div>
+
+</div>
+$0

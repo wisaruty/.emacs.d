@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: fdate
+# key: fdate
+# --
+<FormItem label="$1">
+<DslDate v-model="formItem.$2" > </DslDate>
+</FormItem>

@@ -1,0 +1,2 @@
+;;; Generated package description from find-file-in-project.el  -*- no-byte-compile: t -*-
+(define-package "find-file-in-project" "20220430.107" "Find file/directory and review Diff/Patch/Commit efficiently" '((emacs "25.1")) :commit "116b976b526680c038109882d5cd2d9f218b62a5" :authors '(("Phil Hagelberg, Doug Alcorn, and Will Farrington")) :maintainer '("Chen Bin" . "chenbin.sh@gmail.com") :keywords '("project" "convenience") :url "https://github.com/redguardtoo/find-file-in-project")

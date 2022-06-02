@@ -1,0 +1,2 @@
+;;; Generated package description from eslint-fix.el  -*- no-byte-compile: t -*-
+(define-package "eslint-fix" "20211005.221" "Fix JavaScript files using ESLint" 'nil :commit "0435d8e2864bb4f1be59ae548d0068c69fa31c7a" :authors '(("Neri Marschik" . "marschik_neri@cyberagent.co.jp")) :maintainer '("Neri Marschik" . "marschik_neri@cyberagent.co.jp") :keywords '("tools" "javascript" "eslint" "lint" "formatting" "style") :url "https://github.com/codesuki/eslint-fix")

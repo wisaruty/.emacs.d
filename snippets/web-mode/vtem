@@ -1,0 +1,44 @@
+# -*- mode: snippet -*-
+# name: vtempalte
+# key: vtem
+# --
+<template>
+  <div>
+  <DslTitle title="dmss07010001Title" screen="DMSS07010001"/>
+  <DslCollapse v-model="isOpen" title="searchCriteria">
+  <template v-slot:body>
+  $1
+  </template>
+  <template v-slot:footer>
+  <DslButtonSearch @click="search()"/>
+  <DslButtonClear @click="handleReset()"/>
+  </template>
+  </DslCollapse>
+  </div>
+</template>
+<script>
+// import ControlApi from '@/api/application/ControlApi'
+export default {
+     name: '$2',
+     components: {
+         // components,
+     },
+     // props: ['size'],
+     data () {
+         return {
+             formItem: {
+                 checkDoc: ''
+             },
+             isOpen: 'open'
+             }
+             },
+
+     methods: {
+          funcTodo(){
+          }
+     }
+ }
+
+</script>
+<style  scoped>
+</style>

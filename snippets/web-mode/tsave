@@ -1,0 +1,99 @@
+# -*- mode: snippet -*-
+# name: tsave
+# key: tsave
+# --
+    async save() {
+      if (this.mode === "add") {
+        this.setData();
+        this.$q.loading.show();
+        await this.validateSave();
+        let tabsmenu = this.$menuhelpers.getmenuColl(
+          this.genColtyp,
+          this.genColsubt
+        );
+        for (let i = 0; i < tabsmenu.length; i++) {
+          let tab = tabsmenu[i];
+          let validate = tab["validate"];
+          let routename = tab["routename"];
+          if (validate == true) {
+            await this.$store.commit("collateral/clickSave", true);
+            let path = "/Collateral/" + routename + "/add";
+            if (
+              this.$store.state.collateral.validateStatus[routename] == false
+            ) {
+              if (this.$router.currentRoute.path !== path) {
+                this.$q.loading.hide();
+                this.$router.replace(path);
+                break;
+              } else {
+                this.$q.loading.hide();
+                this.validateSave();
+                break;
+              }
+            }
+          } else {
+            if (i == tabsmenu.length - 1) {
+              if (this.$store.state.collateral.dataCif.length === 0) {
+                this.$q.loading.hide();
+                let path = "/Collateral/CollOwner/add";
+                this.$router.replace(path);
+                this.notifyNegativeAlert("", "กรุณาระบุ ผู้ถือกรรมสิทธ์");
+              } else {
+                this.$q.loading.show();
+                //== set FromVo
+                await this.$store.commit("collateral/setFromVo");
+                //== save Add
+                await this.$store
+                  .dispatch("collateral/insertItemsCollateral", this.coll)
+                  .then(() => {
+                    if (
+                      this.$store.state.collateral.dataRespUpdate
+                        .responseCode === "0000"
+                    ) {
+                      //== Save Sucess
+                      this.$q.loading.hide();
+                      let path = "/Collateral/CollSuccess/add";
+                      this.$router.replace(path);
+                    } else {
+                      //== Save Error
+                      this.$q.loading.hide();
+                      this.notifyNegativeAlert(
+                        this.$store.state.collateral.dataRespUpdate
+                          .responseCode,
+                        this.$store.state.collateral.dataRespUpdate
+                          .responseMessage
+                      );
+                    }
+                  });
+              }
+            }
+          }
+        }
+      } else if (this.mode === "edit") {
+        if (await this.validateSave()) {
+          this.setData();
+          this.$q.loading.show();
+          //== set FromVo
+          await this.$store.commit("collateral/setFromVo");
+          //== save Edit
+          await this.$store
+            .dispatch("collateral/updateItemsCollateral", this.coll)
+            .then(() => {
+              if (
+                this.$store.state.collateral.dataRespUpdate.responseCode ===
+                "0000"
+              ) {
+                this.$q.loading.hide();
+                let path = "/Collateral/CollSuccess/edit";
+                this.$router.replace(path);
+              } else {
+                this.$q.loading.hide();
+                this.notifyNegativeAlert(
+                  this.$store.state.collateral.dataRespUpdate.responseCode,
+                  this.$store.state.collateral.dataRespUpdate.responseMessage
+                );
+              }
+            });
+        }
+      }
+    },

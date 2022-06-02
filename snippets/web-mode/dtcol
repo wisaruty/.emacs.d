@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: data Table column
+# key: dtcol          
+# --
+
+columnsTable: [
+{
+name: "index",
+headerStyle: "font-weight: bold;",
+required: true,
+label: "ลำดับที่",
+align: "left",
+field: row => row.index + 1,
+format: val => `${val}`,
+sortable: true
+},
+
+{
+name: "$1",
+headerStyle: "font-weight: bold;",
+align: "center",
+label: "$2",
+field: "$3",
+sortable: true
+}
+$0
+],

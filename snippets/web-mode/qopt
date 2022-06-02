@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: qopt
+# key: qopt
+# --
+<q-radio
+name="$1"
+v-model="$1"
+val="$2"
+label="$3"
+@input="
+values => {
+changType(values);
+}
+"
+>

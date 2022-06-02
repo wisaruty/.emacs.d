@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: qdate
+# key: qdate
+# --
+<q-input
+ref="$1"
+filled
+v-model="$1"
+mask="##/##/####"
+dense
+style="width:90%"
+label="วันที่"
+:rules="[val => !!val || '']"
+>
+<template v-slot:append>
+<q-icon name="event" class="cursor-pointer">
+<q-popup-proxy
+ref="q$1"
+transition-show="scale"
+transition-hide="scale"
+>
+<q-date
+v-model="$1"
+mask="DD/MM/YYYY"
+@input="() => $refs.q$1.hide()"
+minimal
+lang="th"
+/>
+</q-popup-proxy>
+</q-icon>
+</template>
+</q-input>
+$0

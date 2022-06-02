@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: fsel
+# key: fsel
+# --
+<FormItem
+label="$1"
+prop="$2">
+<DslSelect
+v-model="formItem.$2"
+placeholder="กรุณาระบุ">
+<Option :value="'Y'">ใช้งาน</Option>
+<Option :value="'N'">ไม่ใช้งาน</Option>
+<Option :value="''" >ทั้งหมด</Option>
+</DslSelect>
+</FormItem>
+$0

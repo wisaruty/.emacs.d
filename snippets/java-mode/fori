@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: for index
+# key: fori
+# --
+for (int i = 0; i < $1.length; i++) {
+    $2
+}
+$0

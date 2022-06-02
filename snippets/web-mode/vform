@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: vform
+# key: vform
+# --
+<Form
+ref="formName"
+:model="formItem"
+label-position="top">
+        $0
+</Form>
+

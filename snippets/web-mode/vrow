@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: vrow
+# key: vrow
+# --
+<Row
+:gutter="30"
+type="flex"
+justify="start"
+class="code-row-bg">
+        $0
+</Row>

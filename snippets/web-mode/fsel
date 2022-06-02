@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: fsel
+# key: fsel
+# --
+<FormItem label="$1" >
+<DslSelect v-model="formItem.$2">
+<Option v-for="item in statusList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+</DslSelect>
+</FormItem>
+
+$0
+//data set
+statusList: [
+{
+value: '1',
+label: 'ใช่'
+},
+{
+value: '2',
+label: 'ไม่ใช่'
+}
+],

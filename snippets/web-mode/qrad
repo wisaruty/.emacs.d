@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: qrad
+# key: qrad
+# --
+<q-radio
+name="$1"
+v-model="$1"
+val="$2"
+label="$3"
+></q-radio>

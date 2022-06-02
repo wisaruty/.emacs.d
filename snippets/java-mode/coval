@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: col val add
+# key: coval
+# --
+columns.add("$1");
+values.add($2);
+$0

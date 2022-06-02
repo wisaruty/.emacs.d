@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: qs
+# key: qs       
+# --
+'"+$1+"'

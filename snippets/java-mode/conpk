@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: conpk
+# key: conpk
+# --
+public $1(){}
+public $1($2){
+   $3
+}
+$0

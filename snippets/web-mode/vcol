@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: vcol
+# key: vcol
+# --
+<Col span="5" :xs="24" :md="12" :lg="6" >
+     $0
+</Col>

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: form radio
+# key: frad
+# --
+<FormItem
+label="$1"
+prop="$2">
+        <RadioGroup v-model="formItem.$3" vertical>
+        <DslRadio label="1">Active</DslRadio>
+        <DslRadio label="2">Inactive</DslRadio>
+</RadioGroup>
+</FormItem>
+$0

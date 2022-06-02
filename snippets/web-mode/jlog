@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: json console log
+# key: jlog
+# --
+console.log("json output" + JSON.stringify($1));
+$0

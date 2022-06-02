@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: qtxt
+# key: qtxt
+# --
+<q-input
+name="$1"
+v-model="$1"
+dense
+style="width:95%"
+label="$2"
+outlined
+:readonly="readonly"
+:fileld="readonly"
+></q-input>
+$3

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: sget
+# key: sget
+# --
+this.$store.state.$1.$2;
+$0

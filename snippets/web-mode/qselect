@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: qselect
+# key: qselect
+# --
+<q-select
+filled
+ref="$1"
+v-model="$1"
+:options="option${1:$(upcase-initials yas-text)}"
+label="$2"
+dense
+emit-value
+map-options
+style="width:90%"
+option-value="xxx"
+option-label="description"
+:rules="[val => !!val || 'กรุณาระบุ ราคาประเมิน']"
+/>
+$0

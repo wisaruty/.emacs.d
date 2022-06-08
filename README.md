@@ -1,23 +1,20 @@
 # My emacs settings
+use emacs 27.1
 
 An ever-changing set of emacs settings. Micro-optimizations are super fun.
 These are used in the [Emacs Rocks](http://emacsrocks.com) screencasts.
 You can also see some thoughts behind the settings on my [What the .emacs.d!?](http://whattheemacsd.com)-blog.
 
 ## Setup
+### Microsoft window fix create buffers slow
+net stop netlogon
 
 To grab all the dependencies:
 
-    git clone --recursive git://github.com/magnars/.emacs.d.git
+https://github.com/wisaruty/.emacs.d.git
 
 The first time you start emacs, it will install some additional packages
 that are best handled by the package manager.
-
-## Install emacs on mac
-
-I use Cocoa Emacs, installed like this:
-
-    brew cask install emacs
 
 ## Tips for using these emacs settings
 
@@ -64,6 +61,13 @@ overview of the most commonly used shortcuts to get you through this pain:
 * `C      ` Shorthand for the ctrl-key
 * `M      ` Shorthand for the meta-key (bound to cmd on my mac settings)
 * `S      ` Shorthand for the shift-key
+
+### MaGit
+* `C-x g` git status
+** `tab` Expand modified
+** 'g' refresh
+** 'RET' commit Detail
+
 
 ### Files
 

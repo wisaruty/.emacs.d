@@ -65,3 +65,6 @@ netLogOn.bat
 ssh-keygen -t rsa -P "" -b 4096 -C wisarut.yaemsub@krungthai.com
 git pull
 git pull
+ssh colluat@10.9.255.39
+ssh.exe 
+ssh colluat@10.9.255.39

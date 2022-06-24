@@ -14,7 +14,7 @@
  '(flycheck-idle-change-delay 3.5)
  '(ido-use-filename-at-point nil)
  '(package-selected-packages
-   '(deadgrep multiple-cursors org-brain org-translateb meghanada ace-jump-mode expand-region flycheck magit company-tabnine golden-ratio yasnippet smartparens which-key key-chord eslint-fix js2-mode web-mode counsel-projectile fd-dired company projectile find-file-in-project ag ivy zenburn-theme better-defaults ##))
+   '(org-roam use-package ripgrep deadgrep multiple-cursors org-translateb meghanada ace-jump-mode expand-region flycheck magit company-tabnine golden-ratio yasnippet smartparens which-key key-chord eslint-fix js2-mode web-mode counsel-projectile fd-dired company projectile find-file-in-project ag ivy zenburn-theme better-defaults ##))
  '(projectile-globally-ignored-directories
    '("^\\.idea$" "^\\.vscode$" "^\\.ensime_cache$" "^\\.eunit$" "^\\.git$" "^\\.hg$" "^\\.fslckout$" "^_FOSSIL_$" "^\\.bzr$" "^_darcs$" "^\\.pijul$" "^\\.tox$" "^\\.svn$" "^\\.stack-work$" "^\\.ccls-cache$" "^\\.cache$" "^\\.clangd$" "target" "dist" "node_modules" "build" "lib"))
  '(projectile-globally-ignored-file-suffixes nil)

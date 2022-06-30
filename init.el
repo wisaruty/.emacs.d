@@ -26,7 +26,7 @@
 ;; (set-clipboard-coding-system 'utf-8)
 ;; (set-w32-system-coding-system 'utf-8)
 
-(setq default-directory "D:/workspace/" )
+(setq default-directory "~/WorkSpace" )
 (load-theme 'zenburn t)
 
 
@@ -35,7 +35,7 @@
      (list start end)))
 
 ;;Font
-(set-frame-font "Fira Code 10" nil t)
+(set-frame-font "Fira Code 11" nil t)
 
 ;; No splash screen please ... jeez
 (setq inhibit-startup-message t)
@@ -163,21 +163,35 @@
 (require 'deadgrep)
 (global-set-key (kbd "<f5>") #'deadgrep)
 
-
 (use-package org-roam
   :ensure t
+  :init
+  (setq org-roam-v2-ack t)
   :custom
-  (org-roam-directory (file-truename "D:\\zzDocument\\org-files"))
+  (org-roam-directory (file-truename "~/Roam-Notes"))
+  (org-roam-completion-everywhere t)
+  (org-roam-capture-templates
+   '(("d" "default" plain
+      "%?"
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+      :unnarrowed t)
+     ("l" "programming language" plain
+      "* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n"
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+      :unnarrowed t)     
+     ("b" "book notes" plain
+      "\n* Source\n\nAuthor: %^{Author}\nTitle: ${title}\nYear: %^{Year}\n\n* Summary\n\n%?"
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+      :unnarrowed t)
+     ("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Project")
+      :unnarrowed t)
+     ))
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
-         ("C-c n g" . org-roam-graph)
          ("C-c n i" . org-roam-node-insert)
-         ("C-c n c" . org-roam-capture)
-         ;; Dailies
-         ("C-c n j" . org-roam-dailies-capture-today))
+         :map org-mode-map
+         ("C-M-i" . completion-at-point))
   :config
-  ;; If you're using a vertical completion framework, you might want a more informative completion interface
-  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
   (org-roam-db-autosync-mode)
-  ;; If using org-roam-protocol
-  (require 'org-roam-protocol))
+  (org-roam-setup))

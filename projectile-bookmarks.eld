@@ -1,1 +1,1 @@
-("d:/workspace/CMS_VAYU/CMS_VUE/backend/" "~/.emacs.d/" "d:/workspace/CMS_VAYU/coll-webservice/" "d:/" "d:/workspace/CMS_VAYU/CMS_VUE/frontend/" "d:/workspace/CMS_VAYU/BATCH/marketprice/" "d:/workspace/CMS_VAYU/BATCH/mergebranch/")
+("~/.emacs.d/")

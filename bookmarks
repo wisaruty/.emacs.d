@@ -3,8 +3,8 @@
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-capture-last-stored"
- (filename . "~/Roam-Notes/20220629212921-tense.org")
+ (filename . "~/Roam-Notes/20220720231950-function_word.org")
  (front-context-string)
- (rear-context-string . "\n#+title: Tense\n")
- (position . 83))
+ (rear-context-string . ": function_word\n")
+ (position . 91))
 )

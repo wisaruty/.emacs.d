@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: modaa
-# key: modaa
-# --
-model.addAttribute("$1", $1);
-$0 

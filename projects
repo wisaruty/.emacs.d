@@ -1,2 +1,6 @@
 ;;; -*- lisp-data -*-
-(("d:/workspace/CMS_VAYU/CMSWeb_vue/frontend/"))
+(("d:/workspace/CMS_VAYU/CmsWeb_vue/backend/")
+ ("d:/workspace/CMS_VAYU/CmsWeb_vue/frontend/")
+ ("d:/workspace/CMS_VAYU/migration/coll/")
+ ("d:/workspace/CMS_VAYU/coll-webservice/")
+ ("d:/workspace/CMS_VAYU/CMSWeb_vue/frontend/"))

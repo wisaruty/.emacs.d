@@ -124,3 +124,17 @@ overview of the most commonly used shortcuts to get you through this pain:
 * `F1 t   ` Basic tutorial
 * `F1 k   ` Help for a keybinding
 * `F1 r   ` Emacs' extensive documentation
+
+
+### lsp-java 
+
+If lsp-java doesn't work, a good place to start is to look in the Eclipse server log file:
+tail -f ~/.emacs.d/workspace/.metadata/.log
+
+You need to make the language server use Java 9 and it must be OpenJDK:
+(setq lsp-java-java-path
+      "/usr/lib/jvm/java-9-openjdk-amd64/bin/java")
+
+Wipe the slate clean
+rm -rf ~/.emacs.d/workspace \
+         ~/.emacs.d/.cache/lsp

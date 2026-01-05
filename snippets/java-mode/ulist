@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: ulist
-# key: ulist
-# --
-List<$1> $2 = new ArrayList<$1>();

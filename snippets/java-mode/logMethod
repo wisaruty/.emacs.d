@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: log method
-# key: logm
-# --
-logger.info("======InMethodName>$"+  Thread.currentThread().getStackTrace()[1].getMethodName());

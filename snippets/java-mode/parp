@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: param_put
-# key: parp
-# --
-params.put("$1", $2);
-$0

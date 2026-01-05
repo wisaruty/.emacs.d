@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: tryc
+# key: tryc
+# --
+try{
+	$1
+}catch(Exception e){
+ e.getMessage();
+}
+$0

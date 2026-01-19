@@ -400,7 +400,7 @@
 (setq
  gptel-model 'gemini-2.5-flash
  gptel-backend (gptel-make-gemini "Gemini"
-                 :key "AIzaSyAj84BoPQSS0twbgPY5GzrPpDNrpwph2K8"
+                 :key "xxxxx"
                  :stream t))
 
 

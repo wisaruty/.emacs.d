@@ -396,12 +396,12 @@
 
 
 ;;gemini cil
-
+;; gemini-2.5-flash
+;; gemma-3-27b
+;; gemma-3-12b
+;; gemini-3-flash
 (setq
- gptel-model 'gemini-2.5-flash
- gptel-backend (gptel-make-gemini "Gemini"
-                 :key "xxxxx"
+ gptel-model 'gemma-3-27b
+ gptel-backend (gptel-make-gemini "gemma-3-27b"
+                 :key (getenv "GEMINI_API_KEY")
                  :stream t))
-
-
-

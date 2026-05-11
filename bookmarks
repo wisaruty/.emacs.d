@@ -2,22 +2,4 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("postTrackingRepo"
- (filename . "d:/workspace/LCS/lcs-application/src/main/java/ktb/lcs/features/confirmletterlist/repository/ConfirmLetterRepository.java")
- (front-context-string . "();\n\n\n	StringBui")
- (rear-context-string . "new PostTracking")
- (position . 55010)
- (last-modified 26917 25488 635596 0))
-("popUpDetail"
- (filename . "d:/workspace/LCS/lcs-application/src/main/java/ktb/lcs/features/confirmletterlist/repository/ConfirmLetterRepository.java")
- (front-context-string . "      item.setRe")
- (rear-context-string . ";\n              ")
- (position . 54428)
- (last-modified 26916 10462 930043 0))
-("lcs_search_sp"
- (filename . "d:/workspace/LCS/lcs-application/src/main/java/ktb/lcs/features/confirmletterlist/repository/ConfirmLetterRepository.java")
- (front-context-string . "\n               ")
- (rear-context-string . "no as refNo, \" +")
- (position . 1932)
- (last-modified 26909 29334 731434 0))
-)
+()

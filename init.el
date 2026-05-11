@@ -1,12 +1,9 @@
-';;slowdowns when working with network drives or remote files.
+;;slowdowns when working with network drives or remote files.
 (setq w32-get-true-file-attributes t)
 ;;This can improve file handling performance
-(setq file-name-handler-alist nil)
+;;(setq file-name-handler-alist nil)
 ;; non check signature
 (setq package-check-signature nil)
-
-
-
 (setq package-enable-at-startup nil)
 
 ;; Disable the splash screen and startup message.
@@ -14,7 +11,15 @@
 (setq inhibit-startup-echo-area-message t)
 
 ;; Set the GC threshold to a higher value for better performance.
-(setq gc-cons-threshold (* 8 1000 1024 1024)) ; 100 MB now set 8G
+(setq gc-cons-threshold (* 1 1000 1024 1024)) ; 100 MB now set 1G
+
+
+
+;; ตั้งค่าให้ 1 Tab เท่ากับ 4 ช่อง
+(setq-default tab-width 4)
+
+;; บังคับให้ใช้ Space แทน Tab เสมอ (แนะนำวิธีนี้ที่สุด)
+(setq-default indent-tabs-mode nil)
 
 ;; start straight manage package
 (defvar bootstrap-version)
@@ -33,7 +38,7 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-(dolist (pkg '(gptel emmet-mode swiper ag ripgrep ace-jump-mode magit flycheck projectile ivy web-mode multiple-cursors org-roam org-roam-ui deadgrep js2-mode eslint-fix key-chord which-key golden-ratio expand-region yasnippet zenburn-theme rainbow-delimiters ))
+(dolist (pkg '(aider gptel emmet-mode swiper ag ripgrep ace-jump-mode magit flycheck projectile ivy web-mode multiple-cursors org-roam org-roam-ui deadgrep js2-mode eslint-fix key-chord which-key golden-ratio expand-region yasnippet zenburn-theme rainbow-delimiters ))
    (straight-use-package pkg))
 ;;end straight manage package
 
@@ -56,21 +61,11 @@
 ;;gnu-elpa-keyring-update ;; step2
 ;; fix window create buffer to slow 
 (remove-hook 'find-file-hooks 'vc-find-file-hook)
-;; (setq recentf-auto-cleanup 'never)
-(setq w32-get-true-file-attributes nil)
 
-;;set environment
-;;(set-locale-environment "English")
-;;(set-language-environment 'English)
 
-;; (prefer-coding-system 'utf-8)
-;; (set-file-name-coding-system 'gbk)
-;; (set-buffer-file-coding-system 'utf-8)
-;; (set-keyboard-coding-system 'utf-8)
-;; (set-terminal-coding-system 'utf-8)
-;; (set-selection-coding-system 'utf-8)
-;; (set-clipboard-coding-system 'utf-8)
-;; (set-w32-system-coding-system 'utf-8)
+
+
+
 
 (setq default-directory "D:/workspace/" )
 
@@ -395,13 +390,96 @@
 (add-hook 'web-mode-hook #'emmet-mode)
 
 
-;;gemini cil
-;; gemini-2.5-flash
-;; gemma-3-27b
-;; gemma-3-12b
-;; gemini-3-flash
-(setq
- gptel-model 'gemma-3-27b
- gptel-backend (gptel-make-gemini "gemma-3-27b"
-                 :key (getenv "GEMINI_API_KEY")
-                 :stream t))
+;; Ignore โฟลเดอร์
+(dolist (dir '("node_modules" ".git" "dist" ".mvn" ".idea" "target"))
+  (add-to-list 'projectile-globally-ignored-directories dir))
+;; Ignore fileName
+(add-to-list 'projectile-globally-ignored-files ".aider*")
+
+;; Ignore ไฟล์ตามนามสกุล
+(add-to-list 'projectile-globally-ignored-file-suffixes ".class")
+;; (add-to-list 'projectile-globally-ignored-file-suffixes ".aider.chat.history.md")
+;; (add-to-list 'projectile-globally-ignored-file-suffixes ".aider.conf.yml")
+
+
+;; ตั้งค่า Ollama (Local)
+;; กำหนดให้ใช้ Qwen 3B เป็นค่าเริ่มต้น เพราะลื่นที่สุดสำหรับ CPU
+(setq-default gptel-model 'qwen2.5-coder:3b) 
+
+;; (setq gptel-backend 
+;;       (gptel-make-ollama "Ollama"
+;;         :host "localhost:11434"
+;;         :stream t
+;;         :models '(qwen2.5-coder:3b
+;;                   qwen2.5-coder:7b
+;;                   qwen3-coder-next:cloud))) ;; ใส่เฉพาะตัวที่คุณมีจากการเช็ค 'ollama list'
+
+(with-eval-after-load 'gptel
+  ;; 1. ตั้งค่า Backend ให้ชี้ไปที่ Ollama ของคุณ
+  (setq gptel-backend 
+        (gptel-make-ollama "Ollama"
+          :host "localhost:11434"
+          :stream t
+          :models '(qwen2.5-coder:3b
+                    qwen2.5-coder:7b
+                    qwen3-coder-next:cloud)))
+
+)
+
+
+
+ 
+  
+;;   ;; เพิ่ม "--no-auto-commit" เข้าไปในลิสต์ด้านล่างนี้
+;;   ;; (setq aider-args '("--model" "ollama/qwen2.5-coder:3b" 
+;;   ;;                    "--no-auto-commit" 
+;;   ;;                    "--no-show-model-warnings"))
+
+;;   ;; ollama/qwen3-coder-next:cloud
+;;   ;; ollama/qwen2.5-coder:3b
+;;   )
+
+
+(use-package aider
+  :straight (:host github :repo "tninja/aider.el")
+  :init
+  (setenv "OLLAMA_API_BASE" "http://localhost:11434")
+  (setenv "PYTHONIOENCODING" "utf-8")
+  (setenv "TERM" "dumb")
+  :config
+  ;; (setq aider-args '("--model" "ollama_chat/qwen2.5-coder:3b" 
+  (setq aider-args '("--model" "ollama_chat/qwen3-coder-next:cloud" 
+                     "--no-pretty" 
+                     ;; "--no-stream"
+                     "--subtree-only"))
+
+  ;; (set-selection-coding-system 'utf-8)
+  (modify-coding-system-alist 'process "aider" '(utf-8 . utf-8))
+
+  (global-set-key (kbd "C-c a") 'aider-transient-menu)
+  (aider-magit-setup-transients)
+  
+  (global-auto-revert-mode 1)
+  (setq global-auto-revert-non-file-buffers t)
+)
+
+
+
+;; support thai language
+;; fix from chrome
+(when (eq system-type 'windows-nt)
+  (set-selection-coding-system 'utf-16le-dos)
+  (set-clipboard-coding-system 'utf-16le-dos))
+
+;; perfer uft-8
+(prefer-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-buffer-file-coding-system 'utf-8)
+
+;;fira not fond thai
+(set-fontset-font t 'thai-tis620 (font-spec :family "Leelawadee UI"))
+
+
+
+

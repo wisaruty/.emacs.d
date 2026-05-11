@@ -19,4 +19,5 @@
 (setq mc/cmds-to-run-once
       '(
 	forward-symbol
+	suspend-frame
 	))

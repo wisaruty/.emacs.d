@@ -31,29 +31,23 @@
  '(ido-use-filename-at-point nil)
  '(lsp-java-java-path "C:\\Program Files\\Java\\jdk-17\\bin\\java.exe")
  '(lsp-java-server-install-dir "d:/HOME/lsp/eclipse.jdt.ls/")
- '(projectile-globally-ignored-directories
-   '("^\\.idea$" "^\\.vscode$" "^\\.ensime_cache$" "^\\.eunit$"
-     "^\\.git$" "^\\.hg$" "^\\.fslckout$" "^_FOSSIL_$" "^\\.bzr$"
-     "^_darcs$" "^\\.pijul$" "^\\.tox$" "^\\.svn$" "^\\.stack-work$"
-     "^\\.ccls-cache$" "^\\.cache$" "^\\.clangd$" "target" "dist"
-     "node_modules" "build" "lib"))
- '(projectile-globally-ignored-file-suffixes nil)
+ '(org-agenda-files '("d:/workspace/todolist/cms.org"))
  '(projectile-sort-order 'default)
  '(safe-local-variable-values
    '((eval font-lock-add-keywords nil
-	   '(("defexamples\\|def-example-group\\| => "
-	      (0 'font-lock-keyword-face))
-	     ("(defexamples[[:blank:]]+\\(.*\\)"
-	      (1 'font-lock-function-name-face))))
+           '(("defexamples\\|def-example-group\\| => "
+              (0 'font-lock-keyword-face))
+             ("(defexamples[[:blank:]]+\\(.*\\)"
+              (1 'font-lock-function-name-face))))
      (eval font-lock-add-keywords nil
-	   '(("defexamples\\|def-example-group\\| => "
-	      (0 'font-lock-keyword-face))))
+           '(("defexamples\\|def-example-group\\| => "
+              (0 'font-lock-keyword-face))))
      (eval when
-	   (and (buffer-file-name) (file-regular-p (buffer-file-name))
-		(string-match-p "^[^.]" (buffer-file-name)))
-	   (emacs-lisp-mode))
+           (and (buffer-file-name) (file-regular-p (buffer-file-name))
+                (string-match-p "^[^.]" (buffer-file-name)))
+           (emacs-lisp-mode))
      (eval font-lock-add-keywords nil
-	   '(("defexamples\\| => " (0 'font-lock-keyword-face))))
+           '(("defexamples\\| => " (0 'font-lock-keyword-face))))
      (encoding . utf-8)))
  '(size-indication-mode t)
  '(warning-suppress-types

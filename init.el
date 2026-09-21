@@ -1,3 +1,4 @@
+
 ;;slowdowns when working with network drives or remote files.
 (setq w32-get-true-file-attributes t)
 ;;This can improve file handling performance
@@ -11,7 +12,7 @@
 (setq inhibit-startup-echo-area-message t)
 
 ;; Set the GC threshold to a higher value for better performance.
-(setq gc-cons-threshold (* 1 1000 1024 1024)) ; 100 MB now set 1G
+(setq gc-cons-threshold (* 2 1000 1024 1024)) ; 100 MB now set 1G
 
 
 
@@ -390,80 +391,98 @@
 (add-hook 'web-mode-hook #'emmet-mode)
 
 
-;; Ignore โฟลเดอร์
-(dolist (dir '("node_modules" ".git" "dist" ".mvn" ".idea" "target"))
-  (add-to-list 'projectile-globally-ignored-directories dir))
-;; Ignore fileName
-(add-to-list 'projectile-globally-ignored-files ".aider*")
+;; ตั้งค่าการ Index โปรเจกต์ให้ใช้คำสั่งของระบบ (เร็วขึ้นสำหรับโปรเจกต์ใหญ่)
+(setq projectile-indexing-method 'native)
 
-;; Ignore ไฟล์ตามนามสกุล
-(add-to-list 'projectile-globally-ignored-file-suffixes ".class")
-;; (add-to-list 'projectile-globally-ignored-file-suffixes ".aider.chat.history.md")
-;; (add-to-list 'projectile-globally-ignored-file-suffixes ".aider.conf.yml")
+;; คลีนขึ้น: รวมโฟลเดอร์ที่ไม่ต้องการค้นหาไว้ในที่เดียว
+(setq projectile-globally-ignored-directories
+      (append '("build" "node_modules" ".git" "dist" ".mvn" ".idea" "target" ".aider.tags.cache.v4")
+              projectile-globally-ignored-directories))
+
+;; คลีนขึ้น: รวมไฟล์ที่ไม่ต้องการค้นหา
+(setq projectile-globally-ignored-files
+      (append '(".aider*")
+              projectile-globally-ignored-files))
+
+;; คลีนขึ้น: รวมนามสกุลไฟล์ที่ต้องการข้าม
+(setq projectile-globally-ignored-file-suffixes
+      (append '(".jar")
+              projectile-globally-ignored-file-suffixes))
 
 
 ;; ตั้งค่า Ollama (Local)
-;; กำหนดให้ใช้ Qwen 3B เป็นค่าเริ่มต้น เพราะลื่นที่สุดสำหรับ CPU
-(setq-default gptel-model 'qwen2.5-coder:3b) 
-
-;; (setq gptel-backend 
-;;       (gptel-make-ollama "Ollama"
-;;         :host "localhost:11434"
-;;         :stream t
-;;         :models '(qwen2.5-coder:3b
-;;                   qwen2.5-coder:7b
-;;                   qwen3-coder-next:cloud))) ;; ใส่เฉพาะตัวที่คุณมีจากการเช็ค 'ollama list'
-
+(setq-default gptel-model 'minimax-m3:cloud) 
 (with-eval-after-load 'gptel
   ;; 1. ตั้งค่า Backend ให้ชี้ไปที่ Ollama ของคุณ
   (setq gptel-backend 
         (gptel-make-ollama "Ollama"
           :host "localhost:11434"
           :stream t
-          :models '(qwen2.5-coder:3b
-                    qwen2.5-coder:7b
-                    qwen3-coder-next:cloud)))
+          :models '(minimax-m3:cloud
+                    qwen2.5-coder:14b-instruct-q4_K_M
+                    deepseek-coder-v2:16b                   )))
+  
+  (global-set-key (kbd "C-c g") 'gptel-menu)
 
 )
 
-
-
- 
-  
-;;   ;; เพิ่ม "--no-auto-commit" เข้าไปในลิสต์ด้านล่างนี้
-;;   ;; (setq aider-args '("--model" "ollama/qwen2.5-coder:3b" 
-;;   ;;                    "--no-auto-commit" 
-;;   ;;                    "--no-show-model-warnings"))
-
-;;   ;; ollama/qwen3-coder-next:cloud
-;;   ;; ollama/qwen2.5-coder:3b
-;;   )
 
 
 (use-package aider
   :straight (:host github :repo "tninja/aider.el")
   :init
   (setenv "OLLAMA_API_BASE" "http://localhost:11434")
-  (setenv "PYTHONIOENCODING" "utf-8")
-  (setenv "TERM" "dumb")
+  (setenv "OPENAI_API_BASE" "https://openrouter.ai/api/v1")
+  
+  ;; (setenv "pythonioencoding" "utf-8")
+  ;; (setenv "term" "dumb")
   :config
-  ;; (setq aider-args '("--model" "ollama_chat/qwen2.5-coder:3b" 
-  (setq aider-args '("--model" "ollama_chat/qwen3-coder-next:cloud" 
-                     "--no-pretty" 
-                     ;; "--no-stream"
-                     "--subtree-only"))
+  ;; ย้าย arguments ทั้งหมดมารวมกันที่นี่ (รวมถึงไฟล์ --ignore ด้วย)
+  ;; ตั้งค่า arguments พื้นฐานสำหรับ aider
+  ;; model
+  ;; /model openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
+  ;; /model openrouter/poolside/laguna-s-2.1:free
+  ;; /model openrouter/nvidia/nemotron-3-super-120b-a12b:free
+  ;; /model openrouter/cohere/north-mini-code:free
+  ;; /model github_copilot/claude-sonnet-5
+  ;; /model ollama_chat/minimax-m3:cloud
 
-  ;; (set-selection-coding-system 'utf-8)
-  (modify-coding-system-alist 'process "aider" '(utf-8 . utf-8))
 
+
+  (setq aider-args '("--no-show-model-warnings"
+                     "--no-pretty"                     
+                     ;; "--no-auto-commits"
+                     "--cache-prompts"
+                     "--map-tokens" "2048"
+                     "--edit-format" "diff"
+                     "--no-auto-accept-architect"
+                     ;; "--model" "github_copilot/kimi-k2.7-code"
+                     ;; "--model" "ollama_chat/minimax-m3:cloud"
+                     ;; "--model" "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free"
+                      "--model" "openrouter/poolside/laguna-s-2.1:free"
+                     ;; "--model" "openrouter/openrouter/free"
+                     ;;"--model" "openrouter/cohere/north-mini-code:free"                                        
+                     ;; "--model-settings-file" "~/.aider.model.settings.yml"
+                     "--chat-language" "english"
+                     "--aiderignore" "~/.aiderignore" ))
+
+
+
+  ;; (modify-coding-system-alist 'process "aider" '(utf-8 . utf-8))
+
+  ;; แก้ไขจาก c-c a เป็น C-c a (ใช้ตัว C ใหญ่สำหรับ Ctrl)
   (global-set-key (kbd "C-c a") 'aider-transient-menu)
   (aider-magit-setup-transients)
-  
+
+  ;; auto revert buffer
   (global-auto-revert-mode 1)
   (setq global-auto-revert-non-file-buffers t)
+
+  ;; (global-auto-revert-mode 1)
+  ;; (auto-revert-mode 1)
+  ;; (setq global-auto-revert-non-file-buffers t)
+ 
 )
-
-
 
 ;; support thai language
 ;; fix from chrome
@@ -477,8 +496,6 @@
 (set-keyboard-coding-system 'utf-8)
 (set-buffer-file-coding-system 'utf-8)
 
-;;fira not fond thai
-(set-fontset-font t 'thai-tis620 (font-spec :family "Leelawadee UI"))
 
 
 
